@@ -5,11 +5,13 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -66,6 +68,7 @@ public class MainActivity extends Activity {
 					setClipboard(array.getText().toString());
 				}
 			});
+		showKeyboard();
     }
 
 	private String bytes2hex(byte[] bytes) {
@@ -85,10 +88,24 @@ public class MainActivity extends Activity {
 	}
 
 	private void setClipboard(String text) {
+		if (text.equals("")) {
+			return;
+		}
 		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
 		ClipData clip = ClipData.newPlainText("Copied Text", text);
 		clipboard.setPrimaryClip(clip);
 		Toast.makeText(this, getString(R.string.copied), Toast.LENGTH_SHORT).show();
+	}
+	
+	private void showKeyboard() {
+		new Handler().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					string.requestFocus();
+					InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.showSoftInput(string, InputMethodManager.SHOW_IMPLICIT);
+				}
+			}, 100);
 	}
 
 	@Override
@@ -104,6 +121,7 @@ public class MainActivity extends Activity {
 			case R.id.refresh:
 				string.setText("");
 				array.setText("");
+				showKeyboard();
 				return true;
 
 			default:

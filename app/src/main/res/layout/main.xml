@@ -53,7 +53,7 @@
 			android:hint="@string/array"
 			android:id="@+id/mainEditText2"
 			android:gravity="top"/>
-		
+
 		<ImageView
 			android:src="@drawable/copy"
 			android:layout_width="wrap_content"
@@ -74,6 +74,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:text="@string/convert"
+			style="?android:attr/buttonBarButtonStyle"
 			android:layout_weight="1.0"
 			android:id="@+id/mainButton1"/>
 
@@ -81,6 +82,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:text="@string/reverse"
+			style="?android:attr/buttonBarButtonStyle"
 			android:layout_weight="1.0"
 			android:id="@+id/mainButton2"/>
 
