@@ -1,25 +1,37 @@
 package ru.maximoff.str2array;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import ru.maximoff.str2array.R;
 
 public class MainActivity extends Activity {
+	private EditText string;
+	private EditText array;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+		string = findViewById(R.id.mainEditText1);
+		array = findViewById(R.id.mainEditText2);
 		final String[] charsets = getResources().getStringArray(R.array.charsets);
 		final Spinner spinner = findViewById(R.id.mainSpinner1);
-		final EditText string = findViewById(R.id.mainEditText1);
-		final EditText array = findViewById(R.id.mainEditText2);
-		Button convert = findViewById(R.id.mainButton1);
-		Button reverse = findViewById(R.id.mainButton2);
+		final ImageView copyStr = findViewById(R.id.mainImageView1);
+		final ImageView copyArr = findViewById(R.id.mainImageView2);
+		final Button convert = findViewById(R.id.mainButton1);
+		final Button reverse = findViewById(R.id.mainButton2);
 		convert.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View p1) {
@@ -27,7 +39,7 @@ public class MainActivity extends Activity {
 						String hexArray = bytes2hex(string.getText().toString().getBytes(charsets[spinner.getSelectedItemPosition()]));
 						array.setText(hexArray);
 					} catch (Exception e) {
-						Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+						Toast.makeText(MainActivity.this, getString(R.string.error, e.getMessage()), Toast.LENGTH_SHORT).show();
 					}
 				}
 			});
@@ -38,8 +50,20 @@ public class MainActivity extends Activity {
 						byte[] bytesArray = hex2bytes(array.getText().toString().split("\n"));
 						string.setText(new String(bytesArray, charsets[spinner.getSelectedItemPosition()]));
 					} catch (Exception e) {
-						Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+						Toast.makeText(MainActivity.this, getString(R.string.error, e.getMessage()), Toast.LENGTH_SHORT).show();
 					}
+				}
+			});
+		copyStr.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View p1) {
+					setClipboard(string.getText().toString());
+				}
+			});
+		copyArr.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View p1) {
+					setClipboard(array.getText().toString());
 				}
 			});
     }
@@ -58,5 +82,38 @@ public class MainActivity extends Activity {
 			array[i] = (byte) Integer.parseInt(hex[i].trim().substring(2), 16);
 		}
 		return array;
+	}
+
+	private void setClipboard(String text) {
+		ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+		ClipData clip = ClipData.newPlainText("Copied Text", text);
+		clipboard.setPrimaryClip(clip);
+		Toast.makeText(this, getString(R.string.copied), Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.refresh:
+				string.setText("");
+				array.setText("");
+				return true;
+
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		finish();
 	}
 }

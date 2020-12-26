@@ -13,27 +13,57 @@
 		android:entries="@array/charsets"
 		android:id="@+id/mainSpinner1"/>
 
-	<EditText
+	<RelativeLayout
 		android:layout_width="match_parent"
-		android:inputType="textMultiLine"
 		android:layout_height="0dp"
-		android:ems="10"
 		android:layout_weight="1.0"
-		android:hint="String"
-		android:id="@+id/mainEditText1"
-		android:gravity="top"
-		android:layout_marginBottom="10dp"/>
+		android:layout_marginBottom="10dp">
 
-	<EditText
+		<EditText
+			android:layout_width="match_parent"
+			android:inputType="textMultiLine"
+			android:layout_height="match_parent"
+			android:ems="10"
+			android:hint="@string/string"
+			android:id="@+id/mainEditText1"
+			android:gravity="top"/>
+
+		<ImageView
+			android:src="@drawable/copy"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="5dp"
+			android:layout_marginTop="5dp"
+			android:layout_alignParentRight="true"
+			android:id="@+id/mainImageView1"/>
+
+	</RelativeLayout>
+
+	<RelativeLayout
 		android:layout_width="match_parent"
-		android:inputType="textMultiLine"
 		android:layout_height="0dp"
-		android:ems="10"
 		android:layout_weight="1.0"
-		android:hint="Array"
-		android:id="@+id/mainEditText2"
-		android:gravity="top"
-		android:layout_marginBottom="10dp"/>
+		android:layout_marginBottom="10dp">
+
+		<EditText
+			android:layout_width="match_parent"
+			android:inputType="textMultiLine"
+			android:layout_height="match_parent"
+			android:ems="10"
+			android:hint="@string/array"
+			android:id="@+id/mainEditText2"
+			android:gravity="top"/>
+		
+		<ImageView
+			android:src="@drawable/copy"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginRight="5dp"
+			android:layout_marginTop="5dp"
+			android:layout_alignParentRight="true"
+			android:id="@+id/mainImageView2"/>
+
+	</RelativeLayout>
 
 	<LinearLayout
 		android:orientation="horizontal"
@@ -43,14 +73,14 @@
 		<Button
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="Convert"
+			android:text="@string/convert"
 			android:layout_weight="1.0"
 			android:id="@+id/mainButton1"/>
 
 		<Button
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
-			android:text="Reverse"
+			android:text="@string/reverse"
 			android:layout_weight="1.0"
 			android:id="@+id/mainButton2"/>
 

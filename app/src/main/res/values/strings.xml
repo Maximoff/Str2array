@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Str2array</string>
-
+	<string name="string">String</string>
+	<string name="array">Array</string>
+	<string name="convert">Convert</string>
+	<string name="reverse">Reverse</string>
+	<string name="error">Error: %s</string>
+	<string name="copied">Copied</string>
+	<string name="refresh">Refresh</string>
 </resources>

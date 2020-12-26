@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Str2array</string>
+	<string name="string">Строка</string>
+	<string name="array">Массив</string>
+	<string name="convert">Конвертировать</string>
+	<string name="reverse">Обратно</string>
+	<string name="error">Ошибка: %s</string>
+	<string name="copied">Скопировано</string>
+	<string name="refresh">Обновить</string>
+</resources>
